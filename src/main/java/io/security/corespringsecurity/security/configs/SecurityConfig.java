@@ -44,12 +44,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll() // webingnore와 비슷하지만, 보안필터를 거침
+                .antMatchers("/","/users").permitAll() // webingnore와 비슷하지만, 보안필터를 거침
                 .antMatchers("/mypage").hasRole("USER")
                 .antMatchers("/messages").hasRole("MANAGER")
                 .antMatchers("/config").hasRole("ADMIN")
                 .anyRequest().authenticated() // 시스템에 접속하기 위해서는 인증을 받아야함
-
         .and()
                 .formLogin() // 인증방식 formLogin()
         ;
